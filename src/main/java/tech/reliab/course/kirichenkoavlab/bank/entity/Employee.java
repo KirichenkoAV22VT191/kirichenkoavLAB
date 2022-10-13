@@ -2,6 +2,7 @@ package tech.reliab.course.kirichenkoavlab.bank.entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Employee {
@@ -92,5 +93,37 @@ public class Employee {
 
     public void setSalary(Integer salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (!Objects.equals(id, employee.id)) return false;
+        return Objects.equals(fullName, employee.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", birthday=" + birthday +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", distanceWork=" + distanceWork +
+                ", workPlace='" + workPlace + '\'' +
+                ", accessToCredit=" + accessToCredit +
+                ", salary=" + salary +
+                '}';
     }
 }

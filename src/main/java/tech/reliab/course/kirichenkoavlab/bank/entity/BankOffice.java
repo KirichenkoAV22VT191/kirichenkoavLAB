@@ -1,9 +1,11 @@
 package tech.reliab.course.kirichenkoavlab.bank.entity;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class BankOffice {
     private String id;
+    private Bank bank;
     private String name;
     private String address;
     private Boolean status;
@@ -19,6 +21,7 @@ public class BankOffice {
                       Boolean creditPossibility, Boolean issuingMoney, Boolean depositMoney, Integer moneyInside,
                       Integer rentPrice, Bank bank){
         this.id = UUID.randomUUID().toString();
+        this.bank = bank;
         this.name = name;
         this.address = address;
         this.status = status;
@@ -29,7 +32,6 @@ public class BankOffice {
         this.depositMoney = depositMoney;
         this.moneyInside = moneyInside;
         this.rentPrice = rentPrice;
-        bank.officeCounter += 1;
 
     }
 
@@ -119,5 +121,40 @@ public class BankOffice {
 
     public void setRentPrice(Integer rentPrice) {
         this.rentPrice = rentPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BankOffice that = (BankOffice) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "BankOffice{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", status=" + status +
+                ", placement=" + placement +
+                ", atmCounter=" + atmCounter +
+                ", creditPossibility=" + creditPossibility +
+                ", issuingMoney=" + issuingMoney +
+                ", depositMoney=" + depositMoney +
+                ", moneyInside=" + moneyInside +
+                ", rentPrice=" + rentPrice +
+                '}';
     }
 }

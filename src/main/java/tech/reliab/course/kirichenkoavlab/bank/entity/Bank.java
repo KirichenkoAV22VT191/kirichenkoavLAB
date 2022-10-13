@@ -14,15 +14,23 @@ public class Bank {
     private Integer totalMoney;
     private Float interestRate;
 
-    private Integer calculateInterestRateCoeff(Integer raiting){
-        double k = 0;
-        if (rating == 0){
-            k = 20;
-        }
-        else {
-            k = Math.floor((float)20/(float)rating);
-        }
-        return (int)k;
+    /**
+     *
+     * @param name - имя банка
+     * @param officeCounter - кол-во офисов у банка
+     * @param atmCounter - кол-во банкоматов
+     * @param employeeCounter - кол-во сотрудников
+     * @param clientCounter - кол-во клиентов
+     * @param totalMoney - всего денег в банке
+     */
+    public Bank(String name, Integer officeCounter, Integer atmCounter,
+                Integer employeeCounter, Integer clientCounter, Integer totalMoney){
+        this.name = name;
+        this.officeCounter = officeCounter;
+        this.atmCounter = atmCounter;
+        this.employeeCounter = employeeCounter;
+        this.clientCounter = clientCounter;
+        this.totalMoney = totalMoney;
     }
 
     public Bank(String name){
@@ -38,7 +46,8 @@ public class Bank {
         this.totalMoney = random.nextInt(1_000_000);
 
 
-        this.interestRate = random.nextFloat(calculateInterestRateCoeff(rating), 20);
+        this.interestRate = (float) (20 - Math.toIntExact(
+                (long) Math.floor((float) 20 * ((float) rating / (float) 100))));
 
     }
 
@@ -112,5 +121,38 @@ public class Bank {
 
     public void setInterestRate(Float interestRate) {
         this.interestRate = interestRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Bank bank = (Bank) o;
+
+        if (!id.equals(bank.id)) return false;
+        return name.equals(bank.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", officeCounter=" + officeCounter +
+                ", atmCounter=" + atmCounter +
+                ", employeeCounter=" + employeeCounter +
+                ", clientCounter=" + clientCounter +
+                ", rating=" + rating +
+                ", totalMoney=" + totalMoney +
+                ", interestRate=" + interestRate +
+                '}';
     }
 }

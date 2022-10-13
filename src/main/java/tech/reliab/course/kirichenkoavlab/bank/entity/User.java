@@ -2,6 +2,7 @@ package tech.reliab.course.kirichenkoavlab.bank.entity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.Random;
 import java.util.UUID;
 
@@ -128,5 +129,38 @@ public class User {
 
     public void setCreditRate(Integer creditRate) {
         this.creditRate = creditRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!Objects.equals(id, user.id)) return false;
+        return Objects.equals(fullName, user.fullName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", birthday=" + birthday +
+                ", jobPlace='" + jobPlace + '\'' +
+                ", salary=" + salary +
+                ", banks='" + banks + '\'' +
+                ", creditCheck='" + creditCheck + '\'' +
+                ", payCheck='" + payCheck + '\'' +
+                ", creditRate=" + creditRate +
+                '}';
     }
 }

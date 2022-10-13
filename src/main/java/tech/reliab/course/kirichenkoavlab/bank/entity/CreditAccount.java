@@ -3,6 +3,7 @@ package tech.reliab.course.kirichenkoavlab.bank.entity;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.UUID;
 
 public class CreditAccount {
@@ -122,5 +123,43 @@ public class CreditAccount {
 
     public void setPaymentAccount(PaymentAccount paymentAccount) {
         this.paymentAccount = paymentAccount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CreditAccount that = (CreditAccount) o;
+
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(accountHolder, that.accountHolder))
+            return false;
+        return Objects.equals(bankName, that.bankName);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (accountHolder != null ? accountHolder.hashCode() : 0);
+        result = 31 * result + (bankName != null ? bankName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditAccount{" +
+                "id='" + id + '\'' +
+                ", accountHolder=" + accountHolder +
+                ", bankName='" + bankName + '\'' +
+                ", startDate=" + startDate +
+                ", stopDate=" + stopDate +
+                ", duration=" + duration +
+                ", sum=" + sum +
+                ", monthlyPayment=" + monthlyPayment +
+                ", interestRate=" + interestRate +
+                ", employee=" + employee +
+                ", paymentAccount=" + paymentAccount +
+                '}';
     }
 }
