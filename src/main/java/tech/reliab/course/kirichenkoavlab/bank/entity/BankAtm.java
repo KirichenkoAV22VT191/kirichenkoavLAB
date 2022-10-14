@@ -24,8 +24,8 @@ public class BankAtm {
      * @param status - статус банкомата (-1 - нет денег, 0 - не работает, 1 - работает)
      * @param bankOwner - банк, которому принадлежит банкомат
      * @param serviceEmployee - сотрудник, который обслуживает банкомат
-     * @param issuingMoney - работает ли на выдачу денег (0 - нет, 1 - да)
-     * @param depositMoney - можно ли внести деньги (0 - нет, 1 - да)
+     * @param issuingMoney - работает ли на выдачу денег (false - нет, true - да)
+     * @param depositMoney - можно ли внести деньги (false - нет, true - да)
      * @param serviceCost - стоимость обслуживания банкомата
      * @param moneyInside - кол-во денег в банкомате
      */
