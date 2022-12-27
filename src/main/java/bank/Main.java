@@ -13,13 +13,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Scanner;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class Main {
 
-    static ArrayList<Double> getCritetiaForBanks(ArrayList<Bank> banks){
+    static ArrayList<Double> getCritetiaForBanks(ArrayList<Bank> banks) {
         ArrayList<Double> criteria = new ArrayList<>();
-        for (Bank bank: banks)
-        {
+        for (Bank bank : banks) {
             criteria.add(bank.getBankOffices().size() + bank.getBankATMS().size() +
                     bank.getEmployees().size() + (20 - bank.getInterestRate()));
 
@@ -27,7 +28,7 @@ public class Main {
         return criteria;
     }
 
-    static void mainLab_2()  {
+    static void mainLab_2() {
         ArrayList<Bank> banks = new ArrayList<>();
         ArrayList<User> users = new ArrayList<>();
         BankService bankService = new BankServiceImpl();
@@ -145,8 +146,8 @@ public class Main {
 
         System.out.println("Введите id банка из представленных на экране. Банки расположены в порядке предпочтения от лучшего к худшему");
         for (int index = 0; index < banks.size(); index++) {
-            System.out.println("Информация о банке "+ banks.get(index).getId().toString() + ":\n"+banks.get(index).toString());
-            System.out.println("Критерий банка: "+criteria.get(index).toString()+ "\n");
+            System.out.println("Информация о банке " + banks.get(index).getId().toString() + ":\n" + banks.get(index).toString());
+            System.out.println("Критерий банка: " + criteria.get(index).toString() + "\n");
         }
         System.out.print("Выбранный id: ");
         int choseBankID = input.nextInt();
@@ -156,14 +157,14 @@ public class Main {
                 choseBank = banks.get(index);
                 break;
             }
-            if (index == banks.size()-1)
+            if (index == banks.size() - 1)
                 choseBank = banks.get(index);
         }
 
 
         System.out.println("Выберите id офиса из выбранного вами банка:");
-        for (BankOffice bankOffice: choseBank.getBankOffices()) {
-            System.out.println("Информация о офисе "+ bankOffice.getId().toString() + ":\n" + bankOffice.toString() +"\n");
+        for (BankOffice bankOffice : choseBank.getBankOffices()) {
+            System.out.println("Информация о офисе " + bankOffice.getId().toString() + ":\n" + bankOffice.toString() + "\n");
         }
         System.out.print("Выбранный id: ");
         int choseOfficeID = input.nextInt();
@@ -174,13 +175,13 @@ public class Main {
                 choseOffice = choseBank.getBankOffices().get(index);
                 break;
             }
-            if (index == banks.size()-1)
+            if (index == banks.size() - 1)
                 choseOffice = choseBank.getBankOffices().get(index);
         }
 
         System.out.println("Выберите id сотрудника для выбранного вами офиса:");
-        for (Employee employee: choseOffice.getEmployees()) {
-            System.out.println("Информация о сотруднике" + employee.getId() + ":\n" + employee.toString() +"\n");
+        for (Employee employee : choseOffice.getEmployees()) {
+            System.out.println("Информация о сотруднике" + employee.getId() + ":\n" + employee.toString() + "\n");
         }
         System.out.print("Выбранный id: ");
         int choseEmployeeID = input.nextInt();
@@ -190,13 +191,13 @@ public class Main {
                 choseEmployee = choseOffice.getEmployees().get(index);
                 break;
             }
-            if (index == banks.size()-1)
+            if (index == banks.size() - 1)
                 choseEmployee = choseOffice.getEmployees().get(index);
         }
 
         System.out.println("Выберите id пользователя для которого вы будете брать кредит:");
-        for (User user: users) {
-            System.out.println("Информация о пользователе"+ user.getId() + ":\n" + user.toString() +"\n");
+        for (User user : users) {
+            System.out.println("Информация о пользователе" + user.getId() + ":\n" + user.toString() + "\n");
         }
         System.out.print("Выбранный id: ");
         int choseUserID = input.nextInt();
@@ -206,7 +207,7 @@ public class Main {
                 choseUser = users.get(index);
                 break;
             }
-            if (index == banks.size()-1)
+            if (index == banks.size() - 1)
                 choseUser = users.get(index);
         }
 
@@ -218,7 +219,7 @@ public class Main {
 
 
         System.out.println("Пытаемся открыть кредит");
-        creditAccountService.openCredit(1, choseUser, choseOffice, choseEmployee, LocalDate.now(), month, (double)amount );
+        creditAccountService.openCredit(1, choseUser, choseOffice, choseEmployee, LocalDate.now(), month, (double) amount);
         System.out.println("Успех");
     }
 
@@ -288,7 +289,8 @@ public class Main {
             System.out.println("Ошибка файла: " + e);
         }
     }
+
     public static void main(String[] args) {
-        mainLab_2();
+        mainLab_4();
     }
 }
