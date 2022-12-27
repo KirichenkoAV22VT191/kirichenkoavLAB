@@ -33,6 +33,7 @@ public class Main {
         BankService bankService = new BankServiceImpl();
         BankOfficeService bankOfficeService = new BankOfficeServiceImpl();
         EmployeeService employeeService = new EmployeeServiceImpl();
+        AtmService atmService = new AtmServiceImpl();
         CreditAccountService creditAccountService = new CreditAccountServiceImpl();
         PaymentAccountService paymentAccountService = new PaymentAccountServiceImpl();
         UserService userService = new UserServiceImpl();
@@ -44,8 +45,11 @@ public class Main {
                         String.format("adress%d", i * 3 + j), true, 500.0));
                 bankService.addBankATM(banks.get(i), new BankATM(i * 3 + j, String.format("bank_ATM%d", i * 3 + j),
                         StatusATM.Work, 500.0));
+                bankService.addMoney(banks.get(i), 200000.0);
 
                 bankOfficeService.addATM(banks.get(i).getBankOffices().get(j), banks.get(i).getBankATMS().get(j));
+                atmService.addMoney(banks.get(i).getBankATMS().get(j), 2000.0);
+                bankOfficeService.addMoney(banks.get(i).getBankOffices().get(j), 2000000.0);
                 for (int k = 0; k < 5; k++) {
                     Employee employee = new Employee(5 * (j + 3 * i) + k, String.format("Ivan%d", 5 * (j + 3 * i) + k),
                             String.format("Serov%d", 5 * (j + 3 * i) + k), new Date(19081917), String.format("work%d", k), (double) 500 * k);
@@ -56,6 +60,7 @@ public class Main {
                 employeeService.setWorkerToBankomat(banks.get(i).getBankOffices().get(j).getBankATMS().get(0),
                         banks.get(i).getBankOffices().get(j).getEmployees().get(0));
             }
+            System.out.println();
         }
 
         for (int i = 0; i < 5; i++) {
@@ -73,7 +78,7 @@ public class Main {
                 paymentAccountService.addPayment(i * 2 + j, users.get(i), banks.get(bankIndex));
                 creditAccountService.openCredit(i * 2 + j, users.get(i),
                         banks.get(bankIndex).getBankOffices().get(0), banks.get(bankIndex).getBankOffices().get(0).getEmployees().get(0),
-                        LocalDate.now(), 24, 100.0);
+                        LocalDate.now(), 4, 1.0);
             }
         }
 
@@ -284,6 +289,6 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        mainLab_4();
+        mainLab_2();
     }
 }
