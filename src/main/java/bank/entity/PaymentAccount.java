@@ -21,9 +21,9 @@ public class PaymentAccount extends Account {
         return str;
     }
 
-    public void updateFromJsonClass(JsonPayAcc jsonPayAcc) {
+    public void updateFromJsonClass(JsonPayAcc jsonPayAcc, Integer bankID) {
         this.setId(jsonPayAcc.getId());
-        this.getBank().setId(jsonPayAcc.getBankID());
+        this.getBank().setId(bankID);
         this.getUser().setId(jsonPayAcc.getUserID());
         this.setSum(jsonPayAcc.getSum());
     }

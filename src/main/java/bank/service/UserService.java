@@ -13,6 +13,6 @@ public interface UserService {
     String getInfo(User user);
 
     void saveToFile(String fileName, Bank bank, User user) throws IOException;
-    void updateFromFile(String fileName, User user, Integer bankID) throws IOException;
+    void updateFromFile(String fileName, User user, Integer bankID, Bank bank) throws IOException;
 
 }
