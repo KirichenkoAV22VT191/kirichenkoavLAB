@@ -31,9 +31,9 @@ public class CreditAccount extends Account {
         this.paymentAccount = paymentAccount;
     }
 
-    public void updateFromJsonClass(JsonCreditAcc jsonCreditAcc) {
+    public void updateFromJsonClass(JsonCreditAcc jsonCreditAcc, Integer bankID) {
         this.setId(jsonCreditAcc.getId());
-        this.getBank().setId(jsonCreditAcc.getBankID());
+        this.getBank().setId(bankID);
         this.getUser().setId(jsonCreditAcc.getUserID());
         this.getPaymentAccount().setId(jsonCreditAcc.getPayAccID());
         this.getEmployee().setId(jsonCreditAcc.getEmployeeID());

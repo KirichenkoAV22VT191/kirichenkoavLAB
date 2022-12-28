@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateFromFile(String fileName, User user) throws IOException {
+    public void updateFromFile(String fileName, User user, Integer bankID) throws IOException {
         File file = new File(fileName);
         FileReader fr = new FileReader(file);
         BufferedReader reader = new BufferedReader(fr);
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
                         first = false;
                         this.makePayAccFromJson(gson.fromJson(line, payAccArrType), user);
                     } else {
-                        this.makeCreditAccFromJson(gson.fromJson(line, credAccArrType), user);
+                        this.makeCreditAccFromJson(gson.fromJson(line, credAccArrType), user, bankID);
                     }
                 }
             }
@@ -131,13 +131,13 @@ public class UserServiceImpl implements UserService {
         return jsonCredit;
     }
 
-    private void makeCreditAccFromJson(ArrayList<JsonCreditAcc> jsonCreditAcc, User user) {
+    private void makeCreditAccFromJson(ArrayList<JsonCreditAcc> jsonCreditAcc, User user, Integer bankID) {
         ArrayList<CreditAccount> creditAccounts = user.getCreditAccounts();
         if (!jsonCreditAcc.isEmpty()) {
             for (int i = 0; i < creditAccounts.size(); i++) {
                 for (int j = 0; j < jsonCreditAcc.size(); j++) {
                     if (Objects.equals(creditAccounts.get(i).getId(), jsonCreditAcc.get(j).getId())) {
-                        creditAccounts.get(i).updateFromJsonClass(jsonCreditAcc.get(j));
+                        creditAccounts.get(i).updateFromJsonClass(jsonCreditAcc.get(j), bankID);
                     }
                 }
             }

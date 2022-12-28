@@ -271,16 +271,19 @@ public class Main {
                 paymentAccountService.addPayment(i * 2 + j, users.get(i), banks.get(bankIndex));
                 creditAccountService.openCredit(i * 2 + j, users.get(i),
                         banks.get(bankIndex).getBankOffices().get(0), banks.get(bankIndex).getBankOffices().get(0).getEmployees().get(0),
-                        LocalDate.now(), 24, 100.0);
+                        LocalDate.now(), 14, 100.0);
             }
         }
         try {
-            userService.saveToFile("file.txt", banks.get(0), users.get(0));
             System.out.println("Платёжные счета до записи в файл:");
             System.out.println(users.get(0).getPaymentAccounts());
             System.out.println("\nКредитные счета до записи в файл:");
             System.out.println(users.get(0).getCreditAccounts());
-            userService.updateFromFile("file.txt", users.get(0));
+            userService.saveToFile("file.txt", banks.get(0), users.get(0));
+            paymentAccountService.DeletePayment(users.get(0), banks.get(0), users.get(0).getPaymentAccounts().get(0));
+
+
+            userService.updateFromFile("file.txt", users.get(0), 3);
             System.out.println("\n\n\nПлатёжные счета после обновления из файла:");
             System.out.println(users.get(0).getPaymentAccounts());
             System.out.println("\nКредитные счета после обновления из файла:");
